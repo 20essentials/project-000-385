@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tetris With Canvas</title>
+    <meta name="google" content="notranslate" />
+    <link
+      rel="shortcut icon"
+      href="assets/favicon.webp"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <aside class="score">0</aside>
+    <canvas class="game-tetris"></canvas>
+    <img
+      hidden
+      class="img"
+      src="assets/tetriSprite.png"
+      alt="Sprite Tetris"
+    />
+    <article class="container-buttons">
+      <button class="btn btn-hidden"></button>
+      <button class="btn btn-top">
+        <img src="assets/arrow.png" alt="arrow" />
+      </button>
+      <button class="btn btn-hidden"></button>
+      <button class="btn btn-left">
+        <img src="assets/arrow.png" alt="arrow" />
+      </button>
+      <button class="btn btn-bottom">
+        <img src="assets/arrow.png" alt="arrow" />
+      </button>
+      <button class="btn btn-right">
+        <img src="assets/arrow.png" alt="arrow" />
+      </button>
+    </article>
+
+    <article class="container-btn container-buttons-left">
+      <button class="btn btn2-left">
+        <img src="assets/arrow.png" alt="arrow" />
+      </button>
+      <button class="btn btn2-bottom">
+        <img src="assets/arrow.png" alt="arrow" />
+      </button>
+    </article>
+    <article class="container-btn container-buttons-right">
+      <button class="btn btn2-right">
+        <img src="assets/arrow.png" alt="arrow" />
+      </button>
+      <button class="btn btn2-top">
+        <img src="assets/arrow.png" alt="arrow" />
+      </button>
+    </article>
+
+    <dialog>
+      <article class="container-modal">
+        <h2>GAME OVER</h2>
+        <button class="again">
+          <img src="assets/again.png" alt="again game" />
+        </button>
+      </article>
+    </dialog>
+
+    <button class="yes sound">
+      <aside class="img"></aside>
+    </button>
+  </body>
+</html>

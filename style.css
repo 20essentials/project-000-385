@@ -1,0 +1,288 @@
+*:not(dialog),
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue';
+  -webkit-tap-highlight-color: transparent;
+}
+
+@font-face {
+  font-family: 'Score';
+  src: url('assets/SCOREBOARD.ttf') format('truetype');
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+}
+
+dialog {
+  border: none;
+  border-radius: 13px;
+  transform: scale(0);
+
+  &[open] {
+    transform: scale(1);
+    transition: transform 0.3s ease, display 0.3s ease allow-discrete;
+
+    @starting-style {
+      transform: scale(0);
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right, orange, violet);
+    filter: blur(20px);
+  }
+
+  &::backdrop {
+    background-image: linear-gradient(to bottom, transparent 5%, black);
+  }
+
+  .container-modal {
+    padding-block: 0.5rem;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+
+    h2 {
+      z-index: 20;
+    }
+
+    button {
+      width: 30%;
+      outline: none;
+      border: none;
+      border-radius: 50%;
+      margin-inline: auto;
+      display: flex;
+      flex-wrap: wrap;
+      place-content: center;
+      padding: 0.4rem;
+      transform: scale(1);
+      transition: transform 0.1s linear;
+
+      &:hover {
+        transform: scale(0.95);
+      }
+    }
+
+    img {
+      width: 3rem;
+      height: 3rem;
+      pointer-events: none;
+    }
+  }
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  place-content: center;
+  overflow: hidden;
+  background-image: url('assets/pattern.jpg');
+  background-size: 250px;
+
+  @media (width <= 1111px) and (orientation: landscape) {
+    padding-bottom: 3rem;
+  }
+}
+
+.score {
+  max-width: 230px;
+  min-width: 100px;
+  height: 30px;
+  border: 5px solid #00d0d0;
+  margin-inline: auto;
+  position: relative;
+  top: 5px;
+  border-radius: 12px 12px 0 0;
+  background-color: #ffffff30;
+  font-family: 'Score', sans-serif;
+  color: white;
+  display: flex;
+  font-size: 19px;
+  flex-wrap: wrap;
+  place-content: center;
+}
+
+.container-buttons {
+  position: relative;
+  top: 0.5rem;
+  display: none;
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(2, auto);
+  gap: 0.3rem;
+  width: 120px;
+  margin-inline: auto;
+  display: none;
+
+  @media (width <= 1111px) and (orientation: portrait) {
+    display: grid;
+  }
+
+  button {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: #000;
+    outline: none;
+    border-radius: 12px;
+    transform: scale(1);
+    transition: transform 0.1s ease;
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    img {
+      width: 60%;
+      height: 60%;
+      pointer-events: none;
+    }
+
+    &.btn-hidden {
+      background-color: transparent;
+    }
+
+    &.btn-top img {
+      transform: rotate(-90deg);
+    }
+    &.btn-left img {
+      transform: rotate(-180deg);
+    }
+    &.btn-bottom img {
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.container-btn {
+  width: 40px;
+  height: 80px;
+  position: fixed;
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transform: translateY(-50%);
+  display: none;
+
+  @media (width <= 1111px) and (orientation: landscape) {
+    display: flex;
+  }
+
+  button {
+    transform: scale(1);
+    transition: transform 0.1s ease;
+
+    img {
+      pointer-events: none;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &.container-buttons-left {
+    left: 1rem;
+
+    button {
+      &:first-child img {
+        transform: rotate(-180deg);
+      }
+      &:last-child img {
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  &.container-buttons-right {
+    right: 1rem;
+
+    button {
+      &:last-child img {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+
+  button {
+    width: 40px;
+    height: 40px;
+    outline: none;
+    border: none;
+    background-color: #000;
+    border-radius: 7px;
+    display: flex;
+    flex-wrap: wrap;
+    place-content: center;
+
+    img {
+      width: 55%;
+      height: 55%;
+    }
+  }
+}
+
+canvas {
+  background-color: #ffffff30;
+  border: 20px solid transparent;
+  border-image: url('assets/borderTetris.png') 95 repeat;
+  border-image-width: 20px;
+
+  @media (width <= 1111px) and (orientation: landscape) {
+    top: -50px;
+    zoom: 0.5;
+  }
+}
+
+.sound {
+  width: 2.5rem;
+  height: 2.5rem;
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  border-radius: 50%;
+  outline: none;
+  background-image: linear-gradient(
+    to right bottom,
+    orange,
+    springgreen,
+    skyblue
+  );
+  border: none;
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+
+  &.yes .img {
+    background-image: url('assets/sound-yes.svg');
+  }
+
+  &.no .img {
+    background-image: url('assets/sound-no.svg');
+  }
+
+  .img {
+    width: 60%;
+    height: 60%;
+    pointer-events: none;
+    background-size: cover;
+  }
+}
